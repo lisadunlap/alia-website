@@ -1,0 +1,13 @@
+.space-background {
+  background-image: url("../../assets/yellow_background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.space-background-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Adjust the opacity (last value) as desired */
+  /* filter: brightness(0) invert(1); */
+}

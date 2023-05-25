@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="Diffusion-based Data Augmentation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diversify Your Vision Datasets with Automatic Diffusion-based Augmentation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/custom.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+ 
+
+<section class="hero space-background has-text-black">
+  <div class="hero-body space-background-overlay">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title has-text-black">Diversify Your Vision Datasets with Automatic Diffusion-based Augmentation</span></h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.lisabdunlap.com">Lisa Dunlap</a>,</span>
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/alyssa-umino-b897531a2/">Alyssa Umino</a>,</span>
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/pariszhang11/">Han Zhang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/pariszhang11/">Jiezhi Yang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://people.eecs.berkeley.edu/~jegonzal/">Joseph E. Gonzalez</a>,
+            </span>
+            <span class="author-block">
+              <a href="http://people.eecs.berkeley.edu/~trevor">Trevor Darrell</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">UC Berkeley</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2305.14334"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/lisadunlap/ALIA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                  </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <!-- <span class="icon">
+                     <i class="bi bi-medium"></i>
+                  </span> -->
+                  <span>Blog (Coming Soon)</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Many fine-grained classification tasks, like rare animal identification, have limited training 
+            data and consequently classifiers trained on these datasets often fail to generalize to 
+            variations in the domain like changes in weather or location. As such, we explore how natural 
+            language descriptions of the domains seen in training data can be used with large vision models
+            trained on diverse pretraining datasets to generate useful variations of the training data. 
+            We introduce ALIA (Automated Language-guided Image Augmentation), a method which utilizes 
+            large vision and language models to automatically generate natural language descriptions of a dataset's
+            domains and augment the training data via language-guided image editing. To maintain data integrity, 
+            a model trained on the original dataset filters out minimal image edits and those which corrupt class-relevant information. 
+            The resulting dataset is visually consistent with the original training data and offers significantly enhanced diversity. 
+            On fine-grained and cluttered datasets for classification and detection, ALIA surpasses traditional data augmentation 
+            and text-to-image generated data by up to 15%, often even outperforming equivalent additions of real data.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <figure class="image" id="fig-method">
+    <img src="./assets/teaser.png" class="image-spacing, center" style="width: 700px">
+  </figure>
+  </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- A -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">ALIA</h2>
+        <div class="content has-text-justified">
+          <!-- <p>Given a labeled training dataset, we aim to augment the dataset with images that are edited to improve the representation of various <i>domains</i>. We define <i>domain</i> to be any aspect of an image that is not intended to be used for classification (e.g. location, weather, time of day).</p>
+
+        <p>The key insight of our method is to utilize image captioning and image generation models trained on large amounts of pretraining data to summarize the domains in the training set and use those descriptions to augment training data using text-conditioned image editing.</p>
+
+        <p>Our method consists of 3 stages: generating domain descriptions, generating useful image edits, and filtering out poor edits. An overview of our method is shown in Figure <a href="#fig-method">1</a>.</p> -->
+
+        <p>We focus on how to utilize pretrained vision and language models for image captioning and generation as a <em>translation</em> layer between task-specific image data and task-agnostic natural language descriptions of domains. These high-level domain descriptions, well-represented by image generation models like Stable Diffusion, can be used for <i>language-guided image editing</i> of the specialized training data. This approach produces visually consistent images with the training data, introduces variations in task-agnostic domains, and preserves task-relevant information present in the original image.</p>
+
+        <p>Our method, called ALIA (Automated Language-guided Image Augmentation), first generates captions for each image, summarizes the captions into a short list of domain descriptions using a large language model (LLM), and then employs these descriptions to generate edits of the training data using Stable Diffusion. To ensure data quality, we employ a classifier trained on our original training set to remove images that (1) do not change the domain of the original image as desired or (2) corrupt task-relevant information. After filtration, we are left with an edited dataset that is visually consistent with the original data and represents all domains observed in testing (see Figure <a href="#fig-teaser">1</a>).</p>
+
+        <p>ALIA does not require fine-tuning of the image captioning or image generation model, nor does it rely on user-supplied prompts. We show that our generated data leads to improved performance for domain generalization, fine-grained classification, and addressing bias.</p>
+
+
+        </div>
+        <figure class="image" id="fig-method">
+	  	  <img src="./assets/approach.png" class="center" style="width: 700px">
+	  	</figure>
+      </div>
+    </div>
+    <!--/ A -->
+    <br>
+    <!-- B -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Domain Generalization [iWildCam]</h2>
+        <div class="content has-text-justified">
+          <p>The prompts generated by <i>ALIA</i>:
+            <ol>
+              <li><i>``a camera trap photo of a { } in a grassy field with trees and bushes.''</i></li>
+              <li><i>``a camera trap photo of a { } in a forest in the dark.''</i></li>
+              <li><i>``a camera trap photo of a { } near a large body of water in the middle of a field.''</i></li>
+              <li><i>``a camera trap photo of a { } walking on a dirt trail with twigs and branches.''</i></li>
+            </ol>
+
+        </div>
+        <div class="columns">
+          <figure class="image column">
+            <img src="./assets/wilds.png" class="center" style="width: 600px">
+          </figure>
+        </div>
+      </div>
+    </div>
+    <!--/ B -->
+    <!-- C -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Fine-Grained Classification [CUB]</h2>
+        <div class="content has-text-justified">
+          <p>The prompts generated by <i>ALIA</i>:</p>
+          <ol>
+            <li><i>"a photo of a { } bird interacting with flowers."</i></li>
+            <li><i>"a photo of a { } bird standing by the waters edge."</i></li>
+            <li><i>"a photo of a { } bird perched on a fence."</i></li>
+            <li><i>"a photo of a { } bird standing on a rock."</i></li>
+            <li><i>"a photo of a { } bird perched on a branch."</i></li>
+            <li><i>"a photo of a { } bird flying near a tree, sky as the backdrop."</i></li>
+            <li><i>"a photo of a { } bird perched on a birdfeeder."</i></li>
+          </ol>
+        </div>
+      
+        <div class="columns">
+          <figure class="image column">
+            <img src="./assets/cub.png" class="center" style="width: 600px">
+          </figure>
+        </div>
+      </div>
+    </div>
+    <!--/ C -->
+    <!-- D -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Contextual Bias [Airbus on the road VS Boeing on grass]</h2>
+        <div class="content has-text-justified">
+                  
+        <p>The prompts generated by <i>ALIA</i>:</p>
+        <ol>
+          <li><i>"a photo of a { } airplane on the airport tarmac, surrounded by buildings and other infrastructure.''</i></li>
+          <li><i>"a photo of a { } airplane parked on the runway, grass and trees in the backdrop''</i></li>
+          <li><i>"a photo of a { } airplane parked on a runway, with a vast desert expanding in the background.''</i></li>
+          <li><i>"a photo of a { } airplane a photo of a { } airplane with red and white colors, landing gear down, against a backdrop of a bustling cityscape.''</i></li>
+          <li><i>"a photo of a { } airplane in mid-flight, landing gear deployed against a clear sky.''</i></li>
+        </ol>
+        </div>
+      
+        <div class="columns">
+          <figure class="image column">
+            <img src="./assets/planes.png" class="center" style="width: 600px">
+          </figure>
+        </div>
+      </div>
+    </div>
+    <!--/ D -->
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{dunlap2023alia,
+  author    = {Dunlap, Lisa and Umino, Alyssa and Zhang, Han and Yang, Jiezhi and Gonzalez, Joseph and Darrell, Trevor},
+  title     = {Diversify Your Vision Datasets with Automatic
+    Diffusion-based Augmentation},
+  journal   = {arXiv},
+  year      = {2023},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a 
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              Creative Commons Attribution-ShareAlike 4.0 International License
+            </a>. 
+            The website template is from the 
+            <a href="https://github.com/nerfies/nerfies.github.io">
+              Nerfies
+            </a> 
+            project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
