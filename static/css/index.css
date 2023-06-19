@@ -177,11 +177,6 @@ body {
 .image-spacing { 
   margin-right: 10px; 
   margin-top: 60px; 
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   display: inline-block;
 } 
-
-div {
-  /* border: solid black 1px; */
-  margin-bottom: 10px;
-}
