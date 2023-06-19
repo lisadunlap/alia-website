@@ -17,6 +17,18 @@ body {
   font-variant: small-caps;
 }
 
+.image-caption {
+    text-align: justify;
+    font-style: italic;
+    font-size: 0.8em;
+    margin-top: 5px;
+    /* margin-bottom: px; */
+    /* display: inline-block; */
+    /* width: 700px; */
+    /* /* margin-left: 60px; */
+    /* margin-right: 10px;  */
+  }
+
 
 .teaser .hero-body {
   padding-top: 0;
@@ -34,7 +46,7 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  /* width: 50%; */
 }
 
 .publication-banner {
@@ -165,4 +177,11 @@ body {
 .image-spacing { 
   margin-right: 10px; 
   margin-top: 60px; 
+  margin-bottom: 30px;
+  display: inline-block;
 } 
+
+div {
+  /* border: solid black 1px; */
+  margin-bottom: 10px;
+}
